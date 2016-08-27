@@ -1,41 +1,6 @@
 {
   "paragraphs": [
     {
-      "text": "%dep\nz.reset()\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.load(\"com.databricks:spark-csv_2.10:1.4.0\")",
-      "dateUpdated": "Aug 26, 2016 3:51:38 PM",
-      "config": {
-        "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {}
-        },
-        "enabled": false,
-        "editorMode": "ace/mode/scala",
-        "tableHide": true
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "jobName": "paragraph_1472094980299_-763361269",
-      "id": "20160825-031620_1251469453",
-      "result": {
-        "code": "SUCCESS",
-        "type": "TEXT",
-        "msg": "DepInterpreter(%dep) deprecated. Remove dependencies and repositories through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Load dependency through GUI interpreter menu instead.\nres0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@827331b\n"
-      },
-      "dateCreated": "Aug 25, 2016 3:16:20 AM",
-      "dateStarted": "Aug 25, 2016 3:50:15 AM",
-      "dateFinished": "Aug 25, 2016 3:50:23 AM",
-      "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
-    },
-    {
       "title": "Imports",
       "text": "%pyspark\n\nimport urllib\nimport time\nfrom pyspark.ml.feature import OneHotEncoder, StringIndexer, MinMaxScaler, VectorAssembler\nfrom pyspark.ml.clustering import KMeans, KMeansModel\nfrom pyspark.sql.types import *\nfrom types import *\nfrom pyspark.sql.functions import udf",
       "dateUpdated": "Aug 26, 2016 3:51:38 PM",
@@ -70,41 +35,6 @@
       "dateStarted": "Aug 26, 2016 3:51:38 PM",
       "dateFinished": "Aug 26, 2016 3:51:38 PM",
       "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
-    },
-    {
-      "text": "%pyspark\n\ndf \u003d sqlContext.read.format(\u0027com.databricks.spark.csv\u0027).options(header\u003d\u0027true\u0027, inferschema\u003d\u0027true\u0027, delimiter\u003d\u0027\\t\u0027).load(\u0027s3n://qubole-svstaden/test/input/test_kmeans/test_kmeans.tsv\u0027)\n",
-      "dateUpdated": "Aug 26, 2016 3:51:38 PM",
-      "config": {
-        "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {}
-        },
-        "enabled": false,
-        "editorMode": "ace/mode/scala",
-        "tableHide": true
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "jobName": "paragraph_1472094259427_1180567486",
-      "id": "20160825-030419_250823667",
-      "result": {
-        "code": "ERROR",
-        "type": "TEXT",
-        "msg": "Traceback (most recent call last):\n  File \"/tmp/zeppelin_pyspark.py\", line 239, in \u003cmodule\u003e\n    eval(compiledCode)\n  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n  File \"/usr/lib/spark/python/pyspark/sql/context.py\", line 430, in read\n    return DataFrameReader(self)\n  File \"/usr/lib/spark/python/pyspark/sql/readwriter.py\", line 70, in __init__\n    self._jreader \u003d spark._ssql_ctx.read()\nAttributeError: \u0027JavaMember\u0027 object has no attribute \u0027read\u0027\n"
-      },
-      "dateCreated": "Aug 25, 2016 3:04:19 AM",
-      "dateStarted": "Aug 25, 2016 3:54:52 AM",
-      "dateFinished": "Aug 25, 2016 3:54:52 AM",
-      "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
