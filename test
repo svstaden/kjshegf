@@ -1,0 +1,475 @@
+{
+  "paragraphs": [
+    {
+      "text": "%dep\nz.reset()\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.load(\"com.databricks:spark-csv_2.10:1.4.0\")",
+      "dateUpdated": "Aug 26, 2016 3:51:38 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": false,
+        "editorMode": "ace/mode/scala",
+        "tableHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1472094980299_-763361269",
+      "id": "20160825-031620_1251469453",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "DepInterpreter(%dep) deprecated. Remove dependencies and repositories through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Load dependency through GUI interpreter menu instead.\nres0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@827331b\n"
+      },
+      "dateCreated": "Aug 25, 2016 3:16:20 AM",
+      "dateStarted": "Aug 25, 2016 3:50:15 AM",
+      "dateFinished": "Aug 25, 2016 3:50:23 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Imports",
+      "text": "%pyspark\n\nimport urllib\nimport time\nfrom pyspark.ml.feature import OneHotEncoder, StringIndexer, MinMaxScaler, VectorAssembler\nfrom pyspark.ml.clustering import KMeans, KMeansModel\nfrom pyspark.sql.types import *\nfrom types import *\nfrom pyspark.sql.functions import udf",
+      "dateUpdated": "Aug 26, 2016 3:51:38 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1472067828345_-2104696700",
+      "id": "20160824-194348_1131358929",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Aug 24, 2016 7:43:48 PM",
+      "dateStarted": "Aug 26, 2016 3:51:38 PM",
+      "dateFinished": "Aug 26, 2016 3:51:38 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n\ndf \u003d sqlContext.read.format(\u0027com.databricks.spark.csv\u0027).options(header\u003d\u0027true\u0027, inferschema\u003d\u0027true\u0027, delimiter\u003d\u0027\\t\u0027).load(\u0027s3n://qubole-svstaden/test/input/test_kmeans/test_kmeans.tsv\u0027)\n",
+      "dateUpdated": "Aug 26, 2016 3:51:38 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": false,
+        "editorMode": "ace/mode/scala",
+        "tableHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1472094259427_1180567486",
+      "id": "20160825-030419_250823667",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "Traceback (most recent call last):\n  File \"/tmp/zeppelin_pyspark.py\", line 239, in \u003cmodule\u003e\n    eval(compiledCode)\n  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n  File \"/usr/lib/spark/python/pyspark/sql/context.py\", line 430, in read\n    return DataFrameReader(self)\n  File \"/usr/lib/spark/python/pyspark/sql/readwriter.py\", line 70, in __init__\n    self._jreader \u003d spark._ssql_ctx.read()\nAttributeError: \u0027JavaMember\u0027 object has no attribute \u0027read\u0027\n"
+      },
+      "dateCreated": "Aug 25, 2016 3:04:19 AM",
+      "dateStarted": "Aug 25, 2016 3:54:52 AM",
+      "dateFinished": "Aug 25, 2016 3:54:52 AM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Load Data",
+      "text": "%pyspark\n\ndf \u003d sqlContext.sql(\"select * from default.test_kmeans_large\")\ndf.show()\n",
+      "dateUpdated": "Aug 26, 2016 3:51:38 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1472066266389_978980138",
+      "id": "20160824-191746_1891105748",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+--------------+------+----------+--------+--------+------+------+--------+------+------+------+------+------+-------+-------+-------+-------+------+------+------+------+------+------+------+------+------+------+------+-------+------+------+------+-------+-------+------+------+\n|        invnum|invlin|    invdat|  accnum|  accnam|accad1|accad2|  acccit|accsta|acczip|acctyp|supnum|supnam| supcat| pronum|prodtyp| prodes|procat|prosct|shptyp|qtyshp|untmea|untpri|prityp| sales|untcct|  cost|untfct|fincost|supdev|branum|branam|areanum|areanam|slsnum|slsnam|\n+--------------+------+----------+--------+--------+------+------+--------+------+------+------+------+------+-------+-------+-------+-------+------+------+------+------+------+------+------+------+------+------+------+-------+------+------+------+-------+-------+------+------+\n|  1824-2744579|     6|2015-10-15|   23390|   23390|      |      |   23390|      |      |      |   341|   341| 116408| 116408|       | 116408|  3618|      |     1|   4.0|      | 0.965|      |  3.86|  0.83|  3.32|  0.78|   3.12|      |    87|    87|       |       | 27791| 27791|\n|   937-3283029|     6|2015-01-12|  499347|  499347|      |      |  499347|      |      |      |  2587|  2587|   3221|   3221|       |   3221|    86|      |     2|   8.0|      |  0.65|      |   5.2|   0.4|   3.2|  0.38|   3.04|      |    80|    80|       |       | 24858| 24858|\n| 1599-CP004076|     1|2015-10-14|11119195|11119195|      |      |11119195|      |      |      |  4209|  4209|  64161|  64161|       |  64161|  1933|      |     4|   1.0|      |   1.9|      |   1.9|  1.21|  1.21|  1.14|   1.14|      |    44|    44|       |       | 37778| 37778|\n|    50-8563909|     3|2015-10-14|  771831|  771831|      |      |  771831|      |      |      |  1813|  1813| 106249| 106249|       | 106249|  3362|      |     2|   1.0|      | 14.76|      | 14.76|  8.94|  8.94|   8.4|    8.4|      |    33|    33|       |       |  8245|  8245|\n|    2-WL078872|    15|2015-01-12|  562241|  562241|      |      |  562241|      |      |      |  2587|  2587|   3398|   3398|       |   3398|   599|      |     8|  10.0|      | 9.543|      | 95.43|  9.35|  93.5|  8.79|   87.9|      |    33|    33|       |       |  6771|  6771|\n|  3175-4408856|     4|2015-10-14|11358062|11358062|      |      |11358062|      |      |      |   578|   578|  54414|  54414|       |  54414|  1553|      |     2|   2.0|      | 2.205|      |  4.41|  1.29|  2.58|  1.21|   2.42|      |   164|   164|       |       |  1172|  1172|\n|   196-3279896|     1|2015-01-12|10860456|10860456|      |      |10860456|      |      |      |  1437|  1437|3484871|3484871|       |3484871|  7369|      |     2|   2.0|      |120.96|      |241.92| 86.98|173.96| 81.76| 163.52|      |   147|   147|       |       | 26423| 26423|\n|  101-CW964094|     4|2015-10-14|10770723|10770723|      |      |10770723|      |      |      |  1644|  1644|   5095|   5095|       |   5095|   155|      |     4|   2.0|      | 4.505|      |  9.01|   2.5|   5.0|  2.35|    4.7|      |   147|   147|       |       | 36139| 36139|\n|     5-3379573|    14|2015-10-15| 1069540| 1069540|      |      | 1069540|      |      |      |  2587|  2587|   3263|   3263|       |   3263|    86|      |     1|   5.0|      | 2.606|      | 13.03|  2.31| 11.55|  2.17|  10.85|      |   145|   145|       |       | 11302| 11302|\n|   2903-114863|     6|2015-01-12| 9812288| 9812288|      |      | 9812288|      |      |      |  4166|  4166|  57209|  57209|       |  57209|  4139|      |     1|   2.0|      |  0.22|      |  0.44|  0.21|  0.42|   0.0|    0.0|      |   363|   363|       |       | 31382| 31382|\n|     9-1562326|    20|2015-01-12|11219185|11219185|      |      |11219185|      |      |      |  3009|  3009|    881|    881|       |    881|    23|      |     2|   1.0|      |  3.18|      |  3.18|  1.81|  1.81|   1.7|    1.7|      |   129|   129|       |       | 38137| 38137|\n|   95-WD078939|     4|2015-01-12|   67571|   67571|      |      |   67571|      |      |      |  1644|  1644|   5113|   5113|       |   5113|   155|      |     8|   1.0|      |  1.62|      |  1.62|   1.6|   1.6|   1.5|    1.5|      |    33|    33|       |       |  6692|  6692|\n|    63-2044729|     9|2015-01-13|  265239|  265239|      |      |  265239|      |      |      |   733|   733|  25633|  25633|       |  25633|  7739|      |     2|   2.0|      |  10.0|      |  20.0|  7.77| 15.54|   7.3|   14.6|      |   159|   159|       |       |  7821|  7821|\n|  317-CA169619|    11|2015-01-12|11057659|11057659|      |      |11057659|      |      |      |  3989|  3989|   6289|   6289|       |   6289|  2518|      |     4|   1.0|      | 47.11|      | 47.11|  25.0|  25.0|  23.5|   23.5|      |     7|     7|       |       | 37499| 37499|\n|   625-5237900|     1|2015-01-12| 2553468| 2553468|      |      | 2553468|      |      |      |   782|   782|  40047|  40047|       |  40047|  1094|      |     1|   1.0|      |247.05|      |247.05|228.75|228.75|228.75| 228.75|      |   225|   225|       |       |  2775|  2775|\n|  1157-3036971|    11|2015-10-14| 1872092| 1872092|      |      | 1872092|      |      |      |  3009|  3009|    877|    877|       |    877|  6331|      |     2|   1.0|      |  6.42|      |  6.42|  3.36|  3.36|  3.16|   3.16|      |    18|    18|       |       |  1120|  1120|\n|    52-3940108|    43|2015-10-14| 2159662| 2159662|      |      | 2159662|      |      |      |  2587|  2587|   3398|   3398|       |   3398|   599|      |     2|  20.0|      | 9.182|      |183.64|  8.91| 178.2|  8.38|  167.6|      |   147|   147|       |       |  5547|  5547|\n|  625-TC585351|     7|2015-10-14|11758071|11758071|      |      |11758071|      |      |      |  3009|  3009|    432|    432|       |    432|   626|      |     8|  25.0|      |0.6832|      | 17.08|  0.52|  13.0|  0.46|   11.5|      |   549|   549|       |       | 40429| 40429|\n|  3007-3536356|     1|2015-10-14| 2077474| 2077474|      |      | 2077474|      |      |      |  3009|  3009| 276536| 276536|       | 276536|  5716|      |     2|   0.0|      |  null|      |   0.0|  null|   0.0|  null|    0.0|      |   110|   110|       |       | 31785| 31785|\n|796-TW586280-1|    18|2015-10-14|11758105|11758105|      |      |11758105|      |      |      |  3123|  3123| 148504| 148504|       | 148504|   312|      |     8|   0.0|      |  null|      |   0.0|  null|   0.0|  null|    0.0|      |   549|   549|       |       | 40429| 40429|\n+--------------+------+----------+--------+--------+------+------+--------+------+------+------+------+------+-------+-------+-------+-------+------+------+------+------+------+------+------+------+------+------+------+-------+------+------+------+-------+-------+------+------+\nonly showing top 20 rows\n\n"
+      },
+      "dateCreated": "Aug 24, 2016 7:17:46 PM",
+      "dateStarted": "Aug 26, 2016 3:51:38 PM",
+      "dateFinished": "Aug 26, 2016 3:51:45 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark \n\nprint df.columns",
+      "dateUpdated": "Aug 26, 2016 3:51:38 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1472067587324_1675154760",
+      "id": "20160824-193947_646960275",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "[\u0027invnum\u0027, \u0027invlin\u0027, \u0027invdat\u0027, \u0027accnum\u0027, \u0027accnam\u0027, \u0027accad1\u0027, \u0027accad2\u0027, \u0027acccit\u0027, \u0027accsta\u0027, \u0027acczip\u0027, \u0027acctyp\u0027, \u0027supnum\u0027, \u0027supnam\u0027, \u0027supcat\u0027, \u0027pronum\u0027, \u0027prodtyp\u0027, \u0027prodes\u0027, \u0027procat\u0027, \u0027prosct\u0027, \u0027shptyp\u0027, \u0027qtyshp\u0027, \u0027untmea\u0027, \u0027untpri\u0027, \u0027prityp\u0027, \u0027sales\u0027, \u0027untcct\u0027, \u0027cost\u0027, \u0027untfct\u0027, \u0027fincost\u0027, \u0027supdev\u0027, \u0027branum\u0027, \u0027branam\u0027, \u0027areanum\u0027, \u0027areanam\u0027, \u0027slsnum\u0027, \u0027slsnam\u0027]\n"
+      },
+      "dateCreated": "Aug 24, 2016 7:39:47 PM",
+      "dateStarted": "Aug 26, 2016 3:51:38 PM",
+      "dateFinished": "Aug 26, 2016 3:51:45 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Define arrays for each column type",
+      "text": "%pyspark\n\n# Separate the column headers by type (numeric, category, id, date)\n\ntarget_colnames \u003d \u0027\u0027\n\nidentifier_colnames \u003d [\u0027invnum\u0027, \u0027pronum\u0027]\ndate_colnames \u003d [\u0027invdat\u0027]\nnumeric_colnames \u003d [\u0027qtyshp\u0027, \u0027untpri\u0027, \u0027sales\u0027, \u0027untcct\u0027, \u0027cost\u0027, \u0027untfct\u0027, \u0027fincost\u0027]\ncategory_colnames \u003d [\u0027accnum\u0027, \u0027accnam\u0027, \u0027acccit\u0027, \u0027supnum\u0027, \u0027supnam\u0027, \u0027supcat\u0027, \u0027procat\u0027, \u0027shptyp\u0027, \u0027branum\u0027, \u0027branam\u0027, \u0027slsnum\u0027, \u0027slsnam\u0027]",
+      "dateUpdated": "Aug 26, 2016 3:51:38 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1472068286454_1713658654",
+      "id": "20160824-195126_1183753913",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Aug 24, 2016 7:51:26 PM",
+      "dateStarted": "Aug 26, 2016 3:51:45 PM",
+      "dateFinished": "Aug 26, 2016 3:51:45 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "create dataframe for transformations",
+      "text": "%pyspark\n\ndf_transf \u003d df",
+      "dateUpdated": "Aug 26, 2016 3:51:38 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1472069134714_-298997901",
+      "id": "20160824-200534_1237477500",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Aug 24, 2016 8:05:34 PM",
+      "dateStarted": "Aug 26, 2016 3:51:45 PM",
+      "dateFinished": "Aug 26, 2016 3:51:45 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "UDF to replace non-numerical values with None",
+      "text": "%pyspark\n\ndef convert_null_to_zero(value):\n  try:\n      numeric_value \u003d float(value)\n      return numeric_value\n  except:\n      return 0.0 # Note, in Databricks, \u0027None\u0027 can be returned.  In Qubole, scaling chokes on \u0027None\u0027 values.\n\nudfNullToZero \u003d udf(convert_null_to_zero, DoubleType())\n\nfor colname in numeric_colnames:\n    df_transf \u003d df_transf.withColumn(colname, udfNullToZero(colname)) # overwrites column when output colname \u003d input colname",
+      "dateUpdated": "Aug 26, 2016 3:51:38 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "title": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1472069156883_-2011484607",
+      "id": "20160824-200556_1866600103",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Aug 24, 2016 8:05:56 PM",
+      "dateStarted": "Aug 26, 2016 3:51:45 PM",
+      "dateFinished": "Aug 26, 2016 3:51:45 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "MinMax Scaling",
+      "text": "%pyspark\n\ndf_transf \u003d VectorAssembler(inputCols\u003dnumeric_colnames, outputCol\u003d\"numericFeatures\").transform(df_transf)\nscaler \u003d MinMaxScaler(inputCol\u003d\"numericFeatures\", outputCol\u003d\"numericFeaturesScaled\",).fit(df_transf)\ndf_transf \u003d scaler.transform(df_transf)",
+      "dateUpdated": "Aug 26, 2016 3:51:38 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1472069192134_-1940059229",
+      "id": "20160824-200632_372522384",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "Py4JJavaError: An error occurred while calling o134.fit.\n: org.apache.spark.SparkException: Job aborted due to stage failure: Task 9 in stage 1.0 failed 4 times, most recent failure: Lost task 9.3 in stage 1.0 (TID 38, ip-10-155-170-17.ec2.internal): ExecutorLostFailure (executor 10 exited caused by one of the running tasks) Reason: Container killed by YARN for exceeding memory limits. 7.2 GB of 7.2 GB physical memory used. Consider boosting spark.yarn.executor.memoryOverhead.\nDriver stacktrace:\n\tat org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$failJobAndIndependentStages(DAGScheduler.scala:1458)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1446)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1445)\n\tat scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)\n\tat scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:47)\n\tat org.apache.spark.scheduler.DAGScheduler.abortStage(DAGScheduler.scala:1445)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:826)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:826)\n\tat scala.Option.foreach(Option.scala:236)\n\tat org.apache.spark.scheduler.DAGScheduler.handleTaskSetFailed(DAGScheduler.scala:826)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:1667)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1626)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1615)\n\tat org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:48)\n\tat org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:626)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1952)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:2072)\n\tat org.apache.spark.rdd.RDD$$anonfun$reduce$1.apply(RDD.scala:1025)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:150)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:111)\n\tat org.apache.spark.rdd.RDD.withScope(RDD.scala:316)\n\tat org.apache.spark.rdd.RDD.reduce(RDD.scala:1007)\n\tat org.apache.spark.rdd.RDD$$anonfun$treeAggregate$1.apply(RDD.scala:1150)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:150)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:111)\n\tat org.apache.spark.rdd.RDD.withScope(RDD.scala:316)\n\tat org.apache.spark.rdd.RDD.treeAggregate(RDD.scala:1127)\n\tat org.apache.spark.mllib.linalg.distributed.RowMatrix.computeColumnSummaryStatistics(RowMatrix.scala:405)\n\tat org.apache.spark.mllib.stat.Statistics$.colStats(Statistics.scala:46)\n\tat org.apache.spark.ml.feature.MinMaxScaler.fit(MinMaxScaler.scala:112)\n\tat org.apache.spark.ml.feature.MinMaxScaler.fit(MinMaxScaler.scala:90)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:497)\n\tat py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:231)\n\tat py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:381)\n\tat py4j.Gateway.invoke(Gateway.java:259)\n\tat py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:133)\n\tat py4j.commands.CallCommand.execute(CallCommand.java:79)\n\tat py4j.GatewayConnection.run(GatewayConnection.java:209)\n\tat java.lang.Thread.run(Thread.java:745)\n\n(\u003cclass \u0027py4j.protocol.Py4JJavaError\u0027\u003e, Py4JJavaError(u\u0027An error occurred while calling o134.fit.\\n\u0027, JavaObject id\u003do147), \u003ctraceback object at 0x7fd700063908\u003e)"
+      },
+      "dateCreated": "Aug 24, 2016 8:06:32 PM",
+      "dateStarted": "Aug 26, 2016 3:51:45 PM",
+      "dateFinished": "Aug 26, 2016 3:56:21 PM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "One-hot encode categorical features",
+      "text": "%pyspark\n\ndf_transf \u003d df\nfor col in category_colnames:\n  stringIndexer \u003d StringIndexer(inputCol\u003dcol, outputCol\u003dcol+\"categoryIndex\")\n  indexerModel \u003d stringIndexer.fit(df_transf)\n  df_transf \u003d indexerModel.transform(df_transf)\n  onehot_encoder \u003d OneHotEncoder(inputCol\u003dcol+\"categoryIndex\", outputCol\u003dcol+\"categoryVec\")\n  df_transf \u003d onehot_encoder.transform(df_transf)",
+      "dateUpdated": "Aug 26, 2016 3:51:38 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "title": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1472069203726_-627665407",
+      "id": "20160824-200643_257325514",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Aug 24, 2016 8:06:43 PM",
+      "dateStarted": "Aug 26, 2016 3:51:46 PM",
+      "dateFinished": "Aug 26, 2016 4:02:23 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Assemble the desired columns into the final transformed dataframe",
+      "text": "%pyspark\n\nfinal_colnames \u003d []\nfor colname in df_transf.columns:\n  if colname \u003d\u003d \"numericFeaturesScaled\" or colname.endswith(\"categoryVec\"): \n    final_colnames.append(colname)\n    \ndf_transf \u003d VectorAssembler(inputCols\u003dfinal_colnames, outputCol\u003d\"features\").transform(df_transf)",
+      "dateUpdated": "Aug 26, 2016 3:51:38 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1472092010851_-90692665",
+      "id": "20160825-022650_1611202247",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Aug 25, 2016 2:26:50 AM",
+      "dateStarted": "Aug 26, 2016 3:56:21 PM",
+      "dateFinished": "Aug 26, 2016 4:04:16 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n\nkmeans \u003d KMeans().setK(10).setMaxIter(1).setInitMode(\"k-means||\").setFeaturesCol(\"features\").setPredictionCol(\"prediction\")\nmodel \u003d kmeans.fit(df_transf)",
+      "dateUpdated": "Aug 26, 2016 3:51:38 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1472067575736_892544849",
+      "id": "20160824-193935_106926348",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "Py4JJavaError: An error occurred while calling o504.fit.\n: java.lang.OutOfMemoryError: Java heap space\n\n(\u003cclass \u0027py4j.protocol.Py4JJavaError\u0027\u003e, Py4JJavaError(u\u0027An error occurred while calling o504.fit.\\n\u0027, JavaObject id\u003do529), \u003ctraceback object at 0x7fd700087ea8\u003e)"
+      },
+      "dateCreated": "Aug 24, 2016 7:39:35 PM",
+      "dateStarted": "Aug 26, 2016 4:02:23 PM",
+      "dateFinished": "Aug 26, 2016 4:37:33 PM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "dateUpdated": "Aug 26, 2016 3:51:39 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1472098598543_-765734946",
+      "id": "20160825-041638_664846953",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Aug 25, 2016 4:16:38 AM",
+      "dateStarted": "Aug 26, 2016 4:04:16 PM",
+      "dateFinished": "Aug 26, 2016 4:04:16 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "kmeans-example",
+  "id": "GW52AHGXXC1472066265",
+  "angularObjects": {
+    "2BGNBY2ZV166681461269199986": [],
+    "2BG1S15PB166681461269199989": [],
+    "2BGDAQWU4166681461269199888": []
+  },
+  "config": {},
+  "info": {},
+  "source": "FCN"
+}
